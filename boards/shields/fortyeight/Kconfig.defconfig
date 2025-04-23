@@ -1,0 +1,6 @@
+if SHIELD_FORTYEIGHT
+
+config ZMK_KEYBOARD_NAME
+    default "FortyEight"
+
+endif
