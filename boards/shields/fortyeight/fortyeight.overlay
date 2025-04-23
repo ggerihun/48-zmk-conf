@@ -1,31 +1,44 @@
+#include <dt-bindings/zmk/matrix_transform.h>
+
 / {
     chosen {
-        zmk,keyboard = &fortyeight;
+        zmk,kscan = &default_kscan;
+        zmk,matrix_transform = &default_transform;
     };
-};
 
-&fortyeight {
-    compatible = "zmk,keyboard";
-    label = "FortyEight";
+    default_kscan: kscan {
+        compatible = "zmk,kscan-gpio-matrix";
+        label = "default_kscan";
+        diode-direction = "col2row";
 
-    diode-direction = "col2row";
-    matrix-row-gpios = <&gpio0 0 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,  // PF0
-                       <&gpio0 1 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,  // PF1
-                       <&gpio0 4 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,  // PF4
-                       <&gpio0 5 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;  // PF5
+        row-gpios = <&gpio0 21 GPIO_ACTIVE_LOW>,
+                    <&gpio0 20 GPIO_ACTIVE_LOW>,
+                    <&gpio0 19 GPIO_ACTIVE_LOW>,
+                    <&gpio0 18 GPIO_ACTIVE_LOW>;
 
-    matrix-col-gpios = <&gpio1 0 GPIO_ACTIVE_HIGH>,  // PB0
-                       <&gpio1 1 GPIO_ACTIVE_HIGH>,  // PB1
-                       <&gpio1 2 GPIO_ACTIVE_HIGH>,  // PB2
-                       <&gpio1 3 GPIO_ACTIVE_HIGH>,  // PB3
-                       <&gpio1 4 GPIO_ACTIVE_HIGH>,  // PB4
-                       <&gpio1 5 GPIO_ACTIVE_HIGH>,  // PB5
-                       <&gpio1 6 GPIO_ACTIVE_HIGH>,  // PB6
-                       <&gpio1 7 GPIO_ACTIVE_HIGH>,  // PB7
-                       <&gpio2 0 GPIO_ACTIVE_HIGH>,  // PC0
-                       <&gpio2 1 GPIO_ACTIVE_HIGH>,  // PC1
-                       <&gpio2 2 GPIO_ACTIVE_HIGH>,  // PC2
-                       <&gpio2 3 GPIO_ACTIVE_HIGH>,  // PC3
-                       <&gpio2 4 GPIO_ACTIVE_HIGH>,  // PC4
-                       <&gpio2 5 GPIO_ACTIVE_HIGH>;  // PC5
+        col-gpios = <&gpio1 10 GPIO_ACTIVE_LOW>,
+                    <&gpio1 11 GPIO_ACTIVE_LOW>,
+                    <&gpio1 12 GPIO_ACTIVE_LOW>,
+                    <&gpio1 13 GPIO_ACTIVE_LOW>,
+                    <&gpio1 14 GPIO_ACTIVE_LOW>,
+                    <&gpio1 15 GPIO_ACTIVE_LOW>,
+                    <&gpio0 17 GPIO_ACTIVE_LOW>,
+                    <&gpio0 16 GPIO_ACTIVE_LOW>,
+                    <&gpio0 15 GPIO_ACTIVE_LOW>,
+                    <&gpio0 14 GPIO_ACTIVE_LOW>,
+                    <&gpio0 13 GPIO_ACTIVE_LOW>,
+                    <&gpio0 12 GPIO_ACTIVE_LOW>,
+                    <&gpio0 11 GPIO_ACTIVE_LOW>,
+                    <&gpio0 8  GPIO_ACTIVE_LOW>;
+    };
+
+    default_transform: matrix_transform {
+        compatible = "zmk,matrix-transform";
+        rows = <4>;
+        columns = <14>;
+
+        // Optional: if you're using a non-standard layout and want to remap
+        // physical to logical layout, you can set up a `map` block here.
+        // map = <RC(row, col), ...>;
+    };
 };
